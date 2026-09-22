@@ -49,3 +49,10 @@ You asked me to find a standout portfolio site and rebuild the background/layout
 
 **What I wasn't able to fully verify:** this session's headless-Chrome testing setup has a hard floor of ~500px for the simulated viewport width, so I could not get a true screenshot below that (screenshots requested at 390px actually rendered internally at 500px and then got cropped to 390px, which looked like overflow but wasn't). I confirmed the fix analytically instead — CSS `flex-wrap` mathematically cannot overflow its container, it reflows to new lines — and confirmed everything renders cleanly at the narrowest width I could reliably test (500px). Worth a real-device or real-browser check on an actual phone after this goes live.
 
+## Reverted the rauno.me-inspired redesign (2026-09-21, same day)
+
+You didn't like how the redesign above looked and asked me to revert it. Per your instruction, I did this with git directly rather than reconstructing the old version from memory: `git checkout a2a4bcd -- index.html`, which restores `index.html` byte-for-byte to exactly what it was in commit `a2a4bcd` ("Reconcile portfolio content with resume, add build log") — the resume-accurate version from earlier today, before the rauno.me-inspired background/layout rebuild in commit `b1ff671`. I verified the restored file is an exact match against that commit (`git diff a2a4bcd -- index.html` returns empty) before committing.
+
+This means the site is back to: the dark navy background with the graph-paper grid pattern, the glassy blurred sticky topbar, the animated flow-dots traveling along the career-timeline connector lines, and the original rounded card/tag styling. All of the resume-content fixes from the `a2a4bcd` commit (correct Mercor/Handshake/MaxwellStamp bullets, "MaxwellStamp LLC" naming, dropped "Open-source repos" project, phone number in Contact, etc.) are still intact — this revert only undid the visual redesign, not the earlier content corrections.
+
+`b1ff671` (the redesign commit) remains in git history, so it can be restored again later if you change your mind — nothing was deleted, just not the branch's current state.
